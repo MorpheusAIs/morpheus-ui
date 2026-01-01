@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAccount, useBalance, useChainId } from "wagmi";
+import { useAccount, useChainId } from "wagmi";
 import { formatTokenAmount } from "@morpheus-ui/registry";
-import { MAINNET_CONTRACTS } from "@morpheus-ui/registry";
+import { MAINNET_CONTRACTS, getChainConfig } from "@morpheus-ui/registry";
 
 interface BalanceData {
   address: string;
@@ -37,27 +37,28 @@ export function useMorBalances(options: UseMorBalancesOptions = {}) {
       if (!contracts) return null;
 
       try {
-        // This would typically use viem's getBalance
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_RPC_URL_${chainId}}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              jsonrpc: "2.0",
-              method: "eth_call",
-              params: [
-                {
-                  to: contracts.MORToken,
-                  data: "0x70a08231000000000000000000000000" +
-                    address.slice(2).padStart(64, "0"),
-                },
-                "latest",
-              ],
-              id: 1,
-            }),
-          }
-        );
+        // Get RPC URL from chain config
+        const chainConfig = getChainConfig(chainId as 8453 | 42161 | 84532);
+        const rpcUrl = chainConfig?.rpcUrl || `https://mainnet.base.org`;
+
+        const response = await fetch(rpcUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            jsonrpc: "2.0",
+            method: "eth_call",
+            params: [
+              {
+                to: contracts.MORToken,
+                data:
+                  "0x70a08231000000000000000000000000" +
+                  address.slice(2).padStart(64, "0"),
+              },
+              "latest",
+            ],
+            id: 1,
+          }),
+        });
 
         const data = await response.json();
         const balance = BigInt(parseInt(data.result, 16) || "0");

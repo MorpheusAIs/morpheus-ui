@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAccount } from "wagmi";
-import { MAINNET_CONTRACTS } from "@morpheus-ui/registry";
-import { formatTokenAmount, formatPercentage } from "@morpheus-ui/registry";
+import {
+  MAINNET_CONTRACTS,
+  getChainConfig,
+  formatTokenAmount,
+  formatPercentage,
+} from "@morpheus-ui/registry";
 
 interface CapitalPoolData {
   totalStaked: bigint;
@@ -71,9 +75,13 @@ export function useCapitalPoolData(options: UseCapitalPoolDataOptions = {}) {
   const fetchPoolData = useCallback(async () => {
     if (!address) return;
 
+    // Get RPC URL from chain config
+    const chainConfig = getChainConfig(chainId as 8453 | 42161 | 84532);
+    const rpcUrl = chainConfig?.rpcUrl || "https://mainnet.base.org";
+
     try {
       const responses = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_RPC_URL_${chainId}}`, {
+        fetch(rpcUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -89,7 +97,7 @@ export function useCapitalPoolData(options: UseCapitalPoolDataOptions = {}) {
             id: 1,
           }),
         }),
-        fetch(`${process.env.NEXT_PUBLIC_RPC_URL_${chainId}}`, {
+        fetch(rpcUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -107,7 +115,7 @@ export function useCapitalPoolData(options: UseCapitalPoolDataOptions = {}) {
             id: 2,
           }),
         }),
-        fetch(`${process.env.NEXT_PUBLIC_RPC_URL_${chainId}}`, {
+        fetch(rpcUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
