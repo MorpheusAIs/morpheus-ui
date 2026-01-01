@@ -22,6 +22,8 @@ export interface TokenInfo {
 export interface ContractAddresses {
   MORToken: Record<ChainId, string>;
   BuilderContract: Record<ChainId, string>;
+  BuildersTreasuryV2: Record<ChainId, string>;
+  FeeConfig: Record<ChainId, string>;
   RewardPoolV4: Record<ChainId, string>;
   CapitalPool: Record<ChainId, string>;
   StakingRewards: Record<ChainId, string>;

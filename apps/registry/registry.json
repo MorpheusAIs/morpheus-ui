@@ -64,8 +64,7 @@
           "path": "capital/stake-rewards-modal/stake-rewards-modal.tsx",
           "hashev": "0lq1lq1"
         }
-      ],
-      "type": "components"
+      ]
     },
     {
       "type": "hooks",
