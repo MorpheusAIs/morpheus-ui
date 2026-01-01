@@ -1,0 +1,58 @@
+---
+title: useStakingData
+description: Hook for fetching user's staking data including staked amount and rewards
+---
+
+# useStakingData
+
+Fetch user's staking data including staked amount and pending rewards from the staking contract.
+
+## Usage
+
+```tsx
+import { useStakingData } from "@morpheus-ui/registry";
+
+function StakingStats() {
+  const {
+    formattedStakedAmount,
+    formattedPendingRewards,
+    isLoading,
+    refetch,
+  } = useStakingData({ chainId: 8453 });
+
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <p>Staked: {formattedStakedAmount} MOR</p>
+      <p>Pending Rewards: {formattedPendingRewards} MOR</p>
+      <button onClick={refetch}>Refresh</button>
+    </div>
+  );
+}
+```
+
+## Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `chainId` | `number` | `8453` | Chain ID for staking contract |
+| `pollInterval` | `number` | `30000` | Polling interval in milliseconds |
+| `enabled` | `boolean` | `true` | Enable/disable the hook |
+
+## Return Value
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `stakedAmount` | `bigint` | Raw staked amount in wei |
+| `pendingRewards` | `bigint` | Raw pending rewards in wei |
+| `formattedStakedAmount` | `string` | Formatted staked amount |
+| `formattedPendingRewards` | `string` | Formatted pending rewards |
+| `refetch` | `() => Promise<void>` | Manual refetch function |
+| `lastUpdated` | `Date \| null` | Last update timestamp |
+| `isLoading` | `boolean` | Loading state |
+
+## Dependencies
+
+- `wagmi` - Contract reading
+- `formatTokenAmount` - Value formatting

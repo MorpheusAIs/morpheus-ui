@@ -1,0 +1,41 @@
+---
+title: BridgeFormCard
+description: Cross-chain bridge form for MOR tokens between Base and Arbitrum
+---
+
+# BridgeFormCard
+
+Bridge form for transferring MOR tokens between Base and Arbitrum networks.
+
+## Usage
+
+```tsx
+import { BridgeFormCard } from "@morpheus-ui/registry";
+
+<BridgeFormCard />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Features
+
+- Source/destination chain selection
+- Chain swap button
+- Amount input with validation
+- Balance display for source chain
+- Transaction state management
+- Block explorer links for transactions
+
+## Supported Chains
+
+- **Base (8453)** - Primary L2
+- **Arbitrum (42161)** - Secondary L2
+
+## Dependencies
+
+- `wagmi` - Transaction handling
+- `lucide-react` - Icons

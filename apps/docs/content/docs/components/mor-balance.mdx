@@ -1,0 +1,50 @@
+---
+title: MorBalance
+description: Display MOR token balance for a connected wallet
+---
+
+# MorBalance
+
+Display MOR token balance for a connected wallet across different chains.
+
+## Usage
+
+```tsx
+import { MorBalance, MultiChainBalance } from "@morpheus-ui/registry";
+
+// Single chain balance
+<MorBalance chainId={8453} />
+
+// Multi-chain balance (Base + Arbitrum)
+<MultiChainBalance />
+```
+
+## Props
+
+### MorBalance
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `showAddress` | `boolean` | `false` | Show shortened wallet address |
+| `chainId` | `number` | `8453` | Chain ID (8453 = Base, 42161 = Arbitrum) |
+
+### MultiChainBalance
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `showAddress` | `boolean` | `false` | Show shortened wallet address |
+
+## Features
+
+- Automatic balance fetching using wagmi
+- Loading skeleton state
+- Connect wallet prompt when disconnected
+- Network badge indicator
+- Formatted balance display
+
+## Dependencies
+
+- `wagmi` - Ethereum interactions
+- `NetworkBadge` - Network indicator component

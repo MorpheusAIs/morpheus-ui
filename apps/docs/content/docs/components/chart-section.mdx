@@ -1,0 +1,61 @@
+---
+title: ChartSection
+description: Lightweight SVG-based chart components for data visualization
+---
+
+# ChartSection
+
+SVG-based chart components for visualizing historical data and compositions.
+
+## Usage
+
+```tsx
+import { ChartSection, StackedBarChart } from "@morpheus-ui/registry";
+
+// Line chart with gradient fill
+<ChartSection
+  data={historicalData}
+  title="Staking History"
+/>
+
+// Stacked bar chart
+<StackedBarChart
+  data={compositionData}
+  title="Asset Composition"
+/>
+```
+
+## Components
+
+### ChartSection
+
+Line chart with gradient fill for time-series data.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `DataPoint[]` | - | Array of data points |
+| `title` | `string` | - | Chart title |
+| `className` | `string` | - | Additional CSS classes |
+| `color` | `string` | `"#14b8a6"` | Chart color |
+| `showGrid` | `boolean` | `true` | Show grid lines |
+| `loading` | `boolean` | `false` | Show loading state |
+
+### StackedBarChart
+
+Stacked horizontal bar chart for composition visualization.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `BarData[]` | - | Array of bar segments |
+| `title` | `string` | - | Chart title |
+| `className` | `string` | - | Additional CSS classes |
+
+## Features
+
+- Lightweight SVG implementation (no chart library)
+- Gradient fills for visual appeal
+- Y-axis labels
+- Grid lines
+- Loading states
+- Date range legend
+- Responsive sizing

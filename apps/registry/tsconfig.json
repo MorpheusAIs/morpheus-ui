@@ -12,7 +12,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@morpheus-ui/registry": ["./lib/index.ts"]
     },
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true

@@ -1,0 +1,50 @@
+---
+title: UserAssetsTable
+description: Table displaying user's staked assets across networks
+---
+
+# UserAssetsTable
+
+Table component for displaying user's staked assets with network badges, values, and APY.
+
+## Usage
+
+```tsx
+import { UserAssetsTable } from "@morpheus-ui/registry";
+
+<UserAssetsTable assets={userAssets} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `assets` | `Asset[]` | - | Array of asset objects |
+| `className` | `string` | - | Additional CSS classes |
+| `loading` | `boolean` | `false` | Show loading skeleton |
+
+## Asset Object
+
+```ts
+interface Asset {
+  name: string;
+  symbol: string;
+  network: "base" | "arbitrum";
+  balance: string;
+  value: string;
+  apy: number;
+}
+```
+
+## Features
+
+- Network badge indicators
+- Formatted balance and USD value
+- APY display with percentage formatting
+- Loading skeleton state
+- Empty state handling
+- Total portfolio value summary
+
+## Dependencies
+
+- `NetworkBadge` - Network indicators

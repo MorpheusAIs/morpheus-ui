@@ -1,0 +1,76 @@
+---
+title: useCapitalPoolData
+description: Hook for fetching capital pool data including TVL, user stake, and rewards
+---
+
+# useCapitalPoolData
+
+Fetch capital pool data including total staked, user stake, pending rewards, and APR.
+
+## Usage
+
+```tsx
+import { useCapitalPoolData } from "@morpheus-ui/registry";
+
+function PoolStats() {
+  const {
+    formattedTotalStaked,
+    formattedUserStaked,
+    formattedUserRewards,
+    formattedApr,
+    isLoading,
+  } = useCapitalPoolData({ chainId: 8453 });
+
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <p>Total Staked: {formattedTotalStaked} MOR</p>
+      <p>Your Stake: {formattedUserStaked} MOR</p>
+      <p>Your Rewards: {formattedUserRewards} MOR</p>
+      <p>APR: {formattedApr}</p>
+    </div>
+  );
+}
+```
+
+## Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `chainId` | `number` | `8453` | Chain ID for capital pool contract |
+| `pollInterval` | `number` | `30000` | Polling interval in milliseconds |
+| `enabled` | `boolean` | `true` | Enable/disable the hook |
+
+## Return Value
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `poolData` | `CapitalPoolData \| null` | Raw pool data object |
+| `formattedTotalStaked` | `string` | Formatted total staked in pool |
+| `formattedUserStaked` | `string` | Formatted user's staked amount |
+| `formattedUserRewards` | `string` | Formatted user's pending rewards |
+| `formattedApr` | `string` | Formatted APR percentage |
+| `currentApr` | `number` | Raw APR value |
+| `refetch` | `() => Promise<void>` | Manual refetch function |
+| `lastUpdated` | `Date \| null` | Last update timestamp |
+| `isLoading` | `boolean` | Loading state |
+
+## CapitalPoolData Interface
+
+```ts
+interface CapitalPoolData {
+  totalStaked: bigint;
+  totalRewards: bigint;
+  currentApr: number;
+  userStaked: bigint;
+  userRewards: bigint;
+  epochNumber: number;
+  epochEndTime: Date;
+}
+```
+
+## Dependencies
+
+- `wagmi` - Wallet connection
+- `formatTokenAmount`, `formatPercentage` - Value formatting

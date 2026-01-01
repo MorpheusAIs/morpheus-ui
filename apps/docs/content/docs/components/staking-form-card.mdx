@@ -1,0 +1,46 @@
+---
+title: StakingFormCard
+description: Staking form for MOR tokens with balance display and transaction handling
+---
+
+# StakingFormCard
+
+Complete staking form with balance display, input validation, and transaction state management.
+
+## Usage
+
+```tsx
+import { StakingFormCard } from "@morpheus-ui/registry";
+
+<StakingFormCard chainId={8453} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `chainId` | `number` | `8453` | Chain ID for staking contract |
+
+## Features
+
+- Balance display with Max button
+- Input validation (numbers only, up to 18 decimals)
+- Transaction state management (pending, confirming, success)
+- Error handling and display
+- Transaction hash link to block explorer
+- Loading spinners during transaction
+
+## Dependencies
+
+- `wagmi` - Transaction handling
+- `useMorBalances` - Balance fetching
+- `lucide-react` - Icons
+
+## States
+
+1. **Idle** - Input available, stake button enabled
+2. **Pending** - Wallet confirmation in progress
+3. **Confirming** - Transaction being mined
+4. **Success** - Transaction confirmed
+5. **Error** - Transaction failed or validation error

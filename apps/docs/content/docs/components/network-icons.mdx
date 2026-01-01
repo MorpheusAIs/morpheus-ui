@@ -1,0 +1,49 @@
+---
+title: NetworkIcons
+description: SVG icons and badges for supported blockchain networks
+---
+
+# NetworkIcons
+
+Display network icons and badges for Base and Arbitrum chains.
+
+## Usage
+
+```tsx
+import { NetworkIcon, NetworkBadge } from "@morpheus-ui/registry";
+
+// Icon only
+<NetworkIcon network="base" size={24} />
+<NetworkIcon network="arbitrum" size={24} />
+
+// Badge with label
+<NetworkBadge network="base" />
+<NetworkBadge network="arbitrum" />
+```
+
+## Components
+
+### NetworkIcon
+
+SVG icon for a specific network.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `network` | `"base" \| "arbitrum"` | - | Network to display |
+| `className` | `string` | - | Additional CSS classes |
+| `size` | `number` | `24` | Icon size in pixels |
+
+### NetworkBadge
+
+Pill-shaped badge with icon and network name.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `network` | `"base" \| "arbitrum"` | - | Network to display |
+| `className` | `string` | - | Additional CSS classes |
+
+## Features
+
+- Accessible with ARIA labels
+- Consistent styling with Tailwind
+- Color-coded by network (Base: blue, Arbitrum: sky)

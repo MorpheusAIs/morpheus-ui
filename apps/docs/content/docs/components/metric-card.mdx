@@ -1,0 +1,65 @@
+---
+title: MetricCard
+description: Display metrics with optional change indicators and formatting
+---
+
+# MetricCard
+
+Display key metrics with formatting, change indicators, and responsive grid layouts.
+
+## Usage
+
+```tsx
+import { MetricCard, MetricGrid } from "@morpheus-ui/registry";
+
+<MetricGrid columns={3}>
+  <MetricCard
+    title="Total Staked"
+    value={1250000}
+    format="currency"
+    change={5.2}
+  />
+  <MetricCard
+    title="APR"
+    value={12.5}
+    format="percentage"
+  />
+  <MetricCard
+    title="Active Stakers"
+    value={1234}
+    format="number"
+  />
+</MetricGrid>
+```
+
+## Components
+
+### MetricCard
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | Metric label |
+| `value` | `string \| number` | - | Metric value |
+| `change` | `number` | - | Percentage change (shows arrow indicator) |
+| `icon` | `ReactNode` | - | Icon to display |
+| `className` | `string` | - | Additional CSS classes |
+| `loading` | `boolean` | `false` | Show loading skeleton |
+| `format` | `"number" \| "currency" \| "percentage" \| "plain"` | `"plain"` | Value formatting |
+
+### MetricGrid
+
+Responsive grid wrapper for MetricCard components.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | MetricCard components |
+| `className` | `string` | - | Additional CSS classes |
+| `columns` | `2 \| 3 \| 4` | `3` | Number of columns |
+
+## Features
+
+- Multiple format options (currency, percentage, number)
+- Change indicator with color coding (green/red)
+- Loading skeleton state
+- Hover effects
+- Responsive grid layout
