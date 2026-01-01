@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "claim-rewards-modal",
+  "type": "registry:component",
+  "title": "Claim Rewards Modal",
+  "description": "Modal for claiming earned rewards",
+  "registryDependencies": [
+    "button",
+    "dialog"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/capital/claim-rewards-modal/claim-rewards-modal.tsx",
+      "content": "\"use client\";\n\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n} from \"@/components/ui/dialog\";\nimport { Button } from \"@/components/ui/button\";\nimport { Label } from \"@/components/ui/label\";\nimport { Loader2, Coins } from \"lucide-react\";\nimport { formatTokenAmount } from \"@morpheus-ui/registry\";\n\ninterface ClaimRewardsModalProps {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n  rewards: bigint;\n  decimals?: number;\n  symbol?: string;\n  onClaim?: () => void;\n  loading?: boolean;\n}\n\nexport function ClaimRewardsModal({\n  open,\n  onOpenChange,\n  rewards,\n  decimals = 18,\n  symbol = \"MOR\",\n  onClaim,\n  loading = false,\n}: ClaimRewardsModalProps) {\n  const handleClaim = () => {\n    onClaim?.();\n    onOpenChange(false);\n  };\n\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogContent className=\"sm:max-w-[425px]\">\n        <DialogHeader>\n          <DialogTitle className=\"flex items-center gap-2\">\n            <Coins className=\"h-5 w-5 text-primary\" />\n            Claim Rewards\n          </DialogTitle>\n          <DialogDescription>\n            Claim your earned MOR token rewards.\n          </DialogDescription>\n        </DialogHeader>\n\n        <div className=\"grid gap-4 py-4\">\n          <div className=\"rounded-lg bg-muted p-4 text-center\">\n            <p className=\"text-sm text-muted-foreground mb-1\">\n              Available to Claim\n            </p>\n            <p className=\"text-2xl font-bold font-mono\">\n              {formatTokenAmount(rewards, decimals, 4)} {symbol}\n            </p>\n          </div>\n\n          <p className=\"text-xs text-muted-foreground text-center\">\n            Rewards are automatically compounded when staked in the capital pool.\n          </p>\n        </div>\n\n        <DialogFooter>\n          <Button\n            variant=\"outline\"\n            onClick={() => onOpenChange(false)}\n            disabled={loading}\n          >\n            Cancel\n          </Button>\n          <Button\n            onClick={handleClaim}\n            disabled={loading || rewards <= 0n}\n          >\n            {loading ? (\n              <>\n                <Loader2 className=\"mr-2 h-4 w-4 animate-spin\" />\n                Claiming...\n              </>\n            ) : (\n              \"Claim Rewards\"\n            )}\n          </Button>\n        </DialogFooter>\n      </DialogContent>\n    </Dialog>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  trailingSlash: true,
-  // Disable image optimization for static export
-  images: {
-    unoptimized: true,
-  },
+  // No special config needed for registry
 };
 
 export default nextConfig;

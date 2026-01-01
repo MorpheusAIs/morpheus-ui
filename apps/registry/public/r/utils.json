@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "type": "registry:lib",
+  "title": "Utilities",
+  "description": "Formatting and helper utility functions",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "lib/utils/index.ts",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n\nexport function formatNumber(value: number | bigint, decimals = 2): string {\n  const num = typeof value === \"bigint\" ? Number(value) : value;\n  return new Intl.NumberFormat(\"en-US\", {\n    minimumFractionDigits: decimals,\n    maximumFractionDigits: decimals,\n  }).format(num);\n}\n\nexport function formatAddress(address: string, chars = 4): string {\n  if (!address) return \"\";\n  return `${address.slice(0, chars)}...${address.slice(-chars)}`;\n}\n\nexport function shortenAddress(address: string): string {\n  return formatAddress(address, 6);\n}\n\nexport function formatTokenAmount(\n  amount: bigint,\n  decimals: number,\n  displayDecimals = 4\n): string {\n  const formatted = Number(amount) / Math.pow(10, decimals);\n  return formatted.toLocaleString(\"en-US\", {\n    minimumFractionDigits: 0,\n    maximumFractionDigits: displayDecimals,\n  });\n}\n\nexport function formatPercentage(value: number, decimals = 2): string {\n  return `${(value * 100).toFixed(decimals)}%`;\n}\n\nexport function formatDuration(seconds: number): string {\n  if (seconds < 60) return `${seconds}s`;\n  if (seconds < 3600) return `${Math.floor(seconds / 60)}m`;\n  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h`;\n  return `${Math.floor(seconds / 86400)}d`;\n}\n\nexport function debounce<T extends (...args: unknown[]) => unknown>(\n  fn: T,\n  delay: number\n): (...args: Parameters<T>) => void {\n  let timeoutId: ReturnType<typeof setTimeout>;\n  return (...args: Parameters<T>) => {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => fn(...args), delay);\n  };\n}\n\nexport function calculateApr(\n  totalRewards: bigint,\n  totalStaked: bigint,\n  durationSeconds: number\n): number {\n  if (totalStaked === 0n) return 0;\n  const yearlyRewards =\n    (totalRewards * BigInt(365 * 24 * 60 * 60)) / BigInt(durationSeconds);\n  return Number(yearlyRewards) / Number(totalStaked);\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mor-balance",
+  "type": "registry:component",
+  "title": "MOR Balance",
+  "description": "Display MOR token balance for a connected wallet",
+  "dependencies": [
+    "wagmi"
+  ],
+  "registryDependencies": [
+    "network-icons"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/mor-balance/mor-balance.tsx",
+      "content": "\"use client\";\n\nimport { useMemo } from \"react\";\nimport { useAccount, useBalance } from \"wagmi\";\nimport { NetworkBadge } from \"../network-icons/network-icons\";\nimport { cn, formatTokenAmount, shortenAddress } from \"@morpheus-ui/registry\";\nimport { MAINNET_CONTRACTS, getChainConfig } from \"@morpheus-ui/registry\";\n\ninterface MorBalanceProps {\n  className?: string;\n  showAddress?: boolean;\n  chainId?: number;\n}\n\nexport function MorBalance({\n  className,\n  showAddress = false,\n  chainId = 8453,\n}: MorBalanceProps) {\n  const { address } = useAccount();\n  const contracts = MAINNET_CONTRACTS[chainId as keyof typeof MAINNET_CONTRACTS];\n  const chainConfig = getChainConfig(chainId as keyof typeof getChainConfig);\n\n  const { data: balance, isLoading } = useBalance({\n    address,\n    token: contracts?.MORToken,\n    chainId,\n  });\n\n  const formattedBalance = useMemo(() => {\n    if (!balance?.value) return \"0\";\n    return formatTokenAmount(balance.value, balance.decimals, 4);\n  }, [balance]);\n\n  if (!address) {\n    return (\n      <div className={cn(\"text-sm text-muted-foreground\", className)}>\n        Connect wallet to view balance\n      </div>\n    );\n  }\n\n  if (isLoading) {\n    return (\n      <div className={cn(\"animate-pulse\", className)}>\n        <div className=\"h-4 w-24 bg-muted rounded\" />\n      </div>\n    );\n  }\n\n  return (\n    <div className={cn(\"flex items-center gap-2\", className)}>\n      <div className=\"flex items-center gap-1.5\">\n        <NetworkBadge network=\"base\" />\n      </div>\n      <span className=\"font-mono font-medium\">\n        {formattedBalance} MOR\n      </span>\n      {showAddress && (\n        <span className=\"text-xs text-muted-foreground\">\n          ({shortenAddress(address)})\n        </span>\n      )}\n    </div>\n  );\n}\n\ninterface MultiChainBalanceProps {\n  className?: string;\n  showAddress?: boolean;\n}\n\nexport function MultiChainBalance({\n  className,\n  showAddress = false,\n}: MultiChainBalanceProps) {\n  return (\n    <div className={cn(\"space-y-2\", className)}>\n      <MorBalance\n        chainId={8453}\n        showAddress={showAddress}\n      />\n      <MorBalance\n        chainId={42161}\n        showAddress={showAddress}\n      />\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

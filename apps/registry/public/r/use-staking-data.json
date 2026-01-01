@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-staking-data",
+  "type": "registry:hook",
+  "title": "useStakingData",
+  "description": "Hook for fetching user's staking data",
+  "dependencies": [
+    "wagmi"
+  ],
+  "registryDependencies": [
+    "contracts"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/hooks/use-staking-data/use-staking-data.ts",
+      "content": "\"use client\";\n\nimport { useCallback, useEffect, useMemo, useState } from \"react\";\nimport { useAccount, useReadContract, useWriteContract } from \"wagmi\";\nimport { MAINNET_CONTRACTS } from \"@morpheus-ui/registry\";\nimport { formatTokenAmount } from \"@morpheus-ui/registry\";\n\ninterface StakingData {\n  stakedAmount: bigint;\n  pendingRewards: bigint;\n  lastUpdateTime: bigint;\n  rewardPerTokenStored: bigint;\n}\n\ninterface UseStakingDataOptions {\n  chainId?: number;\n  pollInterval?: number;\n  enabled?: boolean;\n}\n\nconst STAKING_ABI = [\n  {\n    inputs: [{ name: \"account\", type: \"address\" }],\n    name: \"balanceOf\",\n    outputs: [{ name: \"\", type: \"uint256\" }],\n    stateMutability: \"view\",\n    type: \"function\",\n  },\n  {\n    inputs: [{ name: \"account\", type: \"address\" }],\n    name: \"earned\",\n    outputs: [{ name: \"\", type: \"uint256\" }],\n    stateMutability: \"view\",\n    type: \"function\",\n  },\n] as const;\n\nexport function useStakingData(options: UseStakingDataOptions = {}) {\n  const { chainId = 8453, pollInterval = 30000, enabled = true } = options;\n  const { address, isConnected } = useAccount();\n  const contracts =\n    MAINNET_CONTRACTS[chainId as keyof typeof MAINNET_CONTRACTS];\n\n  const [stakingData, setStakingData] = useState<StakingData | null>(null);\n  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);\n\n  // Read staked amount\n  const { data: stakedAmount, refetch: refetchStaked } = useReadContract({\n    address: contracts?.StakingRewards,\n    abi: STAKING_ABI,\n    functionName: \"balanceOf\",\n    args: address ? [address] : undefined,\n    chainId,\n  });\n\n  // Read pending rewards\n  const { data: pendingRewards, refetch: refetchRewards } = useReadContract({\n    address: contracts?.StakingRewards,\n    abi: STAKING_ABI,\n    functionName: \"earned\",\n    args: address ? [address] : undefined,\n    chainId,\n  });\n\n  const refetch = useCallback(async () => {\n    if (!enabled || !isConnected || !address) return;\n\n    await Promise.all([refetchStaked(), refetchRewards()]);\n\n    setStakingData({\n      stakedAmount: (stakedAmount as bigint) || 0n,\n      pendingRewards: (pendingRewards as bigint) || 0n,\n      lastUpdateTime: 0n,\n      rewardPerTokenStored: 0n,\n    });\n    setLastUpdated(new Date());\n  }, [\n    address,\n    enabled,\n    isConnected,\n    pendingRewards,\n    refetchRewards,\n    refetchStaked,\n    stakedAmount,\n  ]);\n\n  // Set up polling\n  useEffect(() => {\n    if (!enabled || !isConnected) return;\n\n    refetch();\n\n    const intervalId = setInterval(refetch, pollInterval);\n\n    return () => clearInterval(intervalId);\n  }, [enabled, isConnected, pollInterval, refetch]);\n\n  const formattedStakedAmount = useMemo(() => {\n    return formatTokenAmount(\n      stakingData?.stakedAmount || 0n,\n      18,\n      4\n    );\n  }, [stakingData?.stakedAmount]);\n\n  const formattedPendingRewards = useMemo(() => {\n    return formatTokenAmount(\n      stakingData?.pendingRewards || 0n,\n      18,\n      4\n    );\n  }, [stakingData?.pendingRewards]);\n\n  return {\n    stakedAmount: stakingData?.stakedAmount || 0n,\n    pendingRewards: stakingData?.pendingRewards || 0n,\n    formattedStakedAmount,\n    formattedPendingRewards,\n    refetch,\n    lastUpdated,\n    isLoading: !lastUpdated && isConnected,\n  };\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,103 +1,214 @@
 {
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "morpheus-ui",
-  "style": "new-york",
-  "tailwind": {
-    "config": "./tailwind.config.ts",
-    "css": "./globals.css"
-  },
-  "files": [
+  "homepage": "https://morpheus-ui.vercel.app",
+  "items": [
     {
-      "type": "components",
+      "name": "mor-balance",
+      "type": "registry:component",
+      "title": "MOR Balance",
+      "description": "Display MOR token balance for a connected wallet",
+      "dependencies": ["wagmi"],
+      "registryDependencies": ["network-icons"],
       "files": [
         {
-          "name": "mor-balance",
-          "path": "mor-balance/mor-balance.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "network-icons",
-          "path": "network-icons/network-icons.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "metric-card",
-          "path": "metric-card/metric-card.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "staking-form-card",
-          "path": "staking-form-card/staking-form-card.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "bridge-form-card",
-          "path": "bridge-form-card/bridge-form-card.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "user-assets-table",
-          "path": "capital/user-assets-table/user-assets-table.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "chart-section",
-          "path": "capital/chart-section/chart-section.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "deposit-modal",
-          "path": "capital/deposit-modal/deposit-modal.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "withdraw-modal",
-          "path": "capital/withdraw-modal/withdraw-modal.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "claim-rewards-modal",
-          "path": "capital/claim-rewards-modal/claim-rewards-modal.tsx",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "stake-rewards-modal",
-          "path": "capital/stake-rewards-modal/stake-rewards-modal.tsx",
-          "hashev": "0lq1lq1"
+          "path": "registry/new-york/mor-balance/mor-balance.tsx",
+          "type": "registry:component"
         }
       ]
     },
     {
-      "type": "hooks",
+      "name": "network-icons",
+      "type": "registry:component",
+      "title": "Network Icons",
+      "description": "SVG icons and badges for Base and Arbitrum networks",
       "files": [
         {
-          "name": "use-mor-balances",
-          "path": "hooks/use-mor-balances/use-mor-balances.ts",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "use-staking-data",
-          "path": "hooks/use-staking-data/use-staking-data.ts",
-          "hashev": "0lq1lq1"
-        },
-        {
-          "name": "use-capital-pool-data",
-          "path": "hooks/use-capital-pool-data/use-capital-pool-data.ts",
-          "hashev": "0lq1lq1"
+          "path": "registry/new-york/network-icons/network-icons.tsx",
+          "type": "registry:component"
         }
       ]
     },
     {
-      "type": "lib",
+      "name": "metric-card",
+      "type": "registry:component",
+      "title": "Metric Card",
+      "description": "Display metrics with formatting and change indicators",
       "files": [
         {
-          "name": "contracts",
+          "path": "registry/new-york/metric-card/metric-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "staking-form-card",
+      "type": "registry:component",
+      "title": "Staking Form Card",
+      "description": "Complete staking form with balance display and transaction handling",
+      "dependencies": ["wagmi", "lucide-react"],
+      "registryDependencies": ["use-mor-balances"],
+      "files": [
+        {
+          "path": "registry/new-york/staking-form-card/staking-form-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bridge-form-card",
+      "type": "registry:component",
+      "title": "Bridge Form Card",
+      "description": "Cross-chain bridge form for MOR tokens",
+      "dependencies": ["wagmi", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/new-york/bridge-form-card/bridge-form-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "user-assets-table",
+      "type": "registry:component",
+      "title": "User Assets Table",
+      "description": "Table displaying user's staked assets across networks",
+      "registryDependencies": ["network-icons"],
+      "files": [
+        {
+          "path": "registry/new-york/capital/user-assets-table/user-assets-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "chart-section",
+      "type": "registry:component",
+      "title": "Chart Section",
+      "description": "Lightweight SVG-based chart components",
+      "files": [
+        {
+          "path": "registry/new-york/capital/chart-section/chart-section.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "deposit-modal",
+      "type": "registry:component",
+      "title": "Deposit Modal",
+      "description": "Modal dialog for depositing assets",
+      "registryDependencies": ["button", "dialog", "input", "label"],
+      "files": [
+        {
+          "path": "registry/new-york/capital/deposit-modal/deposit-modal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "withdraw-modal",
+      "type": "registry:component",
+      "title": "Withdraw Modal",
+      "description": "Modal dialog for withdrawing assets",
+      "registryDependencies": ["button", "dialog", "input", "label"],
+      "files": [
+        {
+          "path": "registry/new-york/capital/withdraw-modal/withdraw-modal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "claim-rewards-modal",
+      "type": "registry:component",
+      "title": "Claim Rewards Modal",
+      "description": "Modal for claiming earned rewards",
+      "registryDependencies": ["button", "dialog"],
+      "files": [
+        {
+          "path": "registry/new-york/capital/claim-rewards-modal/claim-rewards-modal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "stake-rewards-modal",
+      "type": "registry:component",
+      "title": "Stake Rewards Modal",
+      "description": "Modal for staking rewards",
+      "registryDependencies": ["button", "dialog"],
+      "files": [
+        {
+          "path": "registry/new-york/capital/stake-rewards-modal/stake-rewards-modal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "use-mor-balances",
+      "type": "registry:hook",
+      "title": "useMorBalances",
+      "description": "Hook for fetching MOR token balances across multiple chains",
+      "dependencies": ["wagmi"],
+      "registryDependencies": ["contracts"],
+      "files": [
+        {
+          "path": "registry/new-york/hooks/use-mor-balances/use-mor-balances.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-staking-data",
+      "type": "registry:hook",
+      "title": "useStakingData",
+      "description": "Hook for fetching user's staking data",
+      "dependencies": ["wagmi"],
+      "registryDependencies": ["contracts"],
+      "files": [
+        {
+          "path": "registry/new-york/hooks/use-staking-data/use-staking-data.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-capital-pool-data",
+      "type": "registry:hook",
+      "title": "useCapitalPoolData",
+      "description": "Hook for fetching capital pool data",
+      "dependencies": ["wagmi"],
+      "registryDependencies": ["contracts"],
+      "files": [
+        {
+          "path": "registry/new-york/hooks/use-capital-pool-data/use-capital-pool-data.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "contracts",
+      "type": "registry:lib",
+      "title": "Contract Addresses",
+      "description": "Contract addresses for Base, Arbitrum, and Base Sepolia",
+      "files": [
+        {
           "path": "lib/contracts/addresses.ts",
-          "hashev": "0lq1lq1"
-        },
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utilities",
+      "description": "Formatting and helper utility functions",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
         {
-          "name": "utils",
           "path": "lib/utils/index.ts",
-          "hashev": "0lq1lq1"
+          "type": "registry:lib"
         }
       ]
     }
