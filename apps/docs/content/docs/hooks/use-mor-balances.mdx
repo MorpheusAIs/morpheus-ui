@@ -1,0 +1,55 @@
+---
+title: useMorBalances
+description: Hook for fetching MOR token balances across multiple chains
+---
+
+# useMorBalances
+
+Hook for fetching MOR token balances across Base and Arbitrum networks.
+
+## Usage
+
+```tsx
+import { useMorBalances } from "@morpheus-ui/registry";
+
+function BalanceDisplay() {
+  const {
+    balances,
+    totalBalance,
+    formattedTotalBalance,
+    refetch,
+    lastUpdated,
+    isLoading,
+  } = useMorBalances({
+    pollInterval: 60000, // Refresh every 60 seconds
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <p>Total Balance: {formattedTotalBalance} MOR</p>
+      <button onClick={() => refetch()}>Refresh</button>
+      <p>Last updated: {lastUpdated?.toLocaleString()}</p>
+    </div>
+  );
+}
+```
+
+## Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| pollInterval | number | 60000 | How often to poll for balances (in milliseconds) |
+| enabled | boolean | true | Whether to fetch balances |
+
+## Returns
+
+| Property | Type | Description |
+|----------|------|-------------|
+| balances | Record<number, BalanceData> | Balances by chain ID |
+| totalBalance | bigint | Total balance across all chains |
+| formattedTotalBalance | string | Formatted total balance string |
+| refetch | () => Promise<void> | Function to manually refetch balances |
+| lastUpdated | Date \| null | When balances were last updated |
+| isLoading | boolean | Whether data is currently loading |

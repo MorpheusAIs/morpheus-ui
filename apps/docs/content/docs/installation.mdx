@@ -1,0 +1,85 @@
+---
+title: Installation
+description: How to install and set up Morpheus UI
+---
+
+# Installation
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm 9.12+
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/morpheusais/morpheus-ui.git
+cd morpheus-ui
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Build the registry
+
+```bash
+pnpm build:registry
+```
+
+### 4. Start development
+
+```bash
+pnpm dev:registry
+```
+
+## Using Components
+
+Import components from the registry:
+
+```tsx
+import { MorBalance, MetricCard } from "@morpheus-ui/registry";
+
+function Dashboard() {
+  return (
+    <div>
+      <MorBalance address="0x..." />
+      <MetricCard title="Total Staked" value={1000} />
+    </div>
+  );
+}
+```
+
+## Setting up Wagmi
+
+Morpheus UI requires Wagmi to be set up in your application:
+
+```tsx
+import { WagmiProvider, createConfig, http } from "wagmi";
+import { base, arbitrum } from "wagmi/chains";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const config = createConfig({
+  chains: [base, arbitrum],
+  transports: {
+    [base.id]: http(),
+    [arbitrum.id]: http(),
+  },
+});
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <YourApp />
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+}
+```

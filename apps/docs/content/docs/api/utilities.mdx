@@ -1,0 +1,111 @@
+---
+title: Utilities
+description: Utility functions provided by Morpheus UI
+---
+
+# Utilities
+
+## Formatting Functions
+
+### formatNumber
+
+Formats a number with specified decimal places.
+
+```tsx
+import { formatNumber } from "@morpheus-ui/registry";
+
+formatNumber(1234.5678, 2); // "1,234.57"
+formatNumber(1000); // "1,000.00"
+```
+
+### formatTokenAmount
+
+Formats a token amount with decimals.
+
+```tsx
+import { formatTokenAmount } from "@morpheus-ui/registry";
+
+// BigInt with 18 decimals
+formatTokenAmount(1000000000000000000n, 18, 4); // "1.0000"
+formatTokenAmount(1234567890000000000n, 18, 2); // "1.2346"
+```
+
+### formatAddress
+
+Shortens an Ethereum address.
+
+```tsx
+import { formatAddress, shortenAddress } from "@morpheus-ui/registry";
+
+formatAddress("0x1234567890abcdef1234567890abcdef12345678", 6);
+// "0x123456...5678"
+
+shortenAddress("0x1234567890abcdef1234567890abcdef12345678");
+// "0x1234...5678"
+```
+
+### formatPercentage
+
+Formats a number as a percentage.
+
+```tsx
+import { formatPercentage } from "@morpheus-ui/registry";
+
+formatPercentage(0.1234, 2); // "12.34%"
+formatPercentage(0.05); // "5.00%"
+```
+
+### formatDuration
+
+Formats a duration in seconds to a human-readable string.
+
+```tsx
+import { formatDuration } from "@morpheus-ui/registry";
+
+formatDuration(30); // "30s"
+formatDuration(90); // "1m"
+formatDuration(3600); // "1h"
+formatDuration(90000); // "1d"
+```
+
+## Helper Functions
+
+### cn
+
+Merges class names using clsx and tailwind-merge.
+
+```tsx
+import { cn } from "@morpheus-ui/registry";
+
+cn("px-4 py-2", isActive && "bg-blue-500", className);
+// "px-4 py-2 bg-blue-500"
+```
+
+### debounce
+
+Creates a debounced function.
+
+```tsx
+import { debounce } from "@morpheus-ui/registry";
+
+const debouncedFetch = debounce(async (query) => {
+  // API call
+}, 300);
+
+debouncedFetch("search term");
+```
+
+### calculateApr
+
+Calculates APR from total rewards and total staked.
+
+```tsx
+import { calculateApr } from "@morpheus-ui/registry";
+
+const apr = calculateApr(
+  BigInt("1000000000000000000"), // 1M tokens
+  BigInt("100000000000000000000"), // 100M staked
+  86400 * 7 // 1 week
+);
+// 0.52 (52% APR)
+```

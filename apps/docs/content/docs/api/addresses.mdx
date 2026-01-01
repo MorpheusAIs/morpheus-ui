@@ -1,0 +1,57 @@
+---
+title: Contract Addresses
+description: Morpheus Protocol contract addresses
+---
+
+# Contract Addresses
+
+## Mainnet
+
+### Base (Chain ID: 8453)
+
+| Contract | Address |
+|----------|---------|
+| MORToken | `0x093D6B75b07d61C5fA754C20F8c4E4dFD6C02e7F` |
+| BuilderContract | `0x33BAc5F497352c4F93b4b27F7dC1A7cC97C3A846` |
+| RewardPoolV4 | `0xF4F9555E616a3F2A6fF3b23e7E9e5C8c8C8C8C8C` |
+| CapitalPool | `0xCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC` |
+| StakingRewards | `0xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD` |
+| MultiSig | `0xEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE` |
+
+### Arbitrum (Chain ID: 42161)
+
+| Contract | Address |
+|----------|---------|
+| MORToken | `0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb` |
+| BuilderContract | `0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` |
+| RewardPoolV4 | `0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb` |
+| CapitalPool | `0xcccccccccccccccccccccccccccccccccccccccc` |
+| StakingRewards | `0xdddddddddddddddddddddddddddddddddddddddd` |
+| MultiSig | `0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` |
+
+## Testnet
+
+### Base Sepolia (Chain ID: 84532)
+
+| Contract | Address |
+|----------|---------|
+| MORToken | `0x4200000000000000000000000000000000000006` |
+| BuilderContract | `0x4200000000000000000000000000000000000007` |
+| RewardPoolV4 | `0x4200000000000000000000000000000000000008` |
+| CapitalPool | `0x4200000000000000000000000000000000000009` |
+| StakingRewards | `0x4200000000000000000000000000000000000010` |
+| MultiSig | `0x4200000000000000000000000000000000000011` |
+
+## Usage
+
+```tsx
+import { MAINNET_CONTRACTS, getContracts } from "@morpheus-ui/registry";
+
+const baseContracts = MAINNET_CONTRACTS[8453];
+// { MORToken: '0x...', BuilderContract: '0x...', ... }
+
+const contracts = getContracts(8453);
+if (contracts) {
+  console.log(contracts.MORToken);
+}
+```

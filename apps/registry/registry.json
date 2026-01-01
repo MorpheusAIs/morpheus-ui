@@ -1,0 +1,106 @@
+{
+  "name": "morpheus-ui",
+  "style": "new-york",
+  "tailwind": {
+    "config": "./tailwind.config.ts",
+    "css": "./globals.css"
+  },
+  "files": [
+    {
+      "type": "components",
+      "files": [
+        {
+          "name": "mor-balance",
+          "path": "mor-balance/mor-balance.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "network-icons",
+          "path": "network-icons/network-icons.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "metric-card",
+          "path": "metric-card/metric-card.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "staking-form-card",
+          "path": "staking-form-card/staking-form-card.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "bridge-form-card",
+          "path": "bridge-form-card/bridge-form-card.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "user-assets-table",
+          "path": "capital/user-assets-table/user-assets-table.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "chart-section",
+          "path": "capital/chart-section/chart-section.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "deposit-modal",
+          "path": "capital/deposit-modal/deposit-modal.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "withdraw-modal",
+          "path": "capital/withdraw-modal/withdraw-modal.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "claim-rewards-modal",
+          "path": "capital/claim-rewards-modal/claim-rewards-modal.tsx",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "stake-rewards-modal",
+          "path": "capital/stake-rewards-modal/stake-rewards-modal.tsx",
+          "hashev": "0lq1lq1"
+        }
+      ],
+      "type": "components"
+    },
+    {
+      "type": "hooks",
+      "files": [
+        {
+          "name": "use-mor-balances",
+          "path": "hooks/use-mor-balances/use-mor-balances.ts",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "use-staking-data",
+          "path": "hooks/use-staking-data/use-staking-data.ts",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "use-capital-pool-data",
+          "path": "hooks/use-capital-pool-data/use-capital-pool-data.ts",
+          "hashev": "0lq1lq1"
+        }
+      ]
+    },
+    {
+      "type": "lib",
+      "files": [
+        {
+          "name": "contracts",
+          "path": "lib/contracts/addresses.ts",
+          "hashev": "0lq1lq1"
+        },
+        {
+          "name": "utils",
+          "path": "lib/utils/index.ts",
+          "hashev": "0lq1lq1"
+        }
+      ]
+    }
+  ]
+}

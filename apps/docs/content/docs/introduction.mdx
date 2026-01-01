@@ -1,0 +1,53 @@
+---
+title: Introduction
+description: Welcome to Morpheus UI documentation
+---
+
+# Morpheus UI
+
+Morpheus UI is a Web3 component library for Morpheus Protocol, built on [shadcn/ui](https://ui.shadcn.com) and [Tailwind CSS](https://tailwindcss.com).
+
+## Features
+
+- **Web3-First Components**: Pre-built components for token balances, staking, bridging, and more
+- **Multi-Chain Support**: Native support for Base and Arbitrum networks
+- **Type-Safe**: Full TypeScript support with shared types
+- **Customizable**: Built on Tailwind CSS for easy theming
+- **Performance Optimized**: Efficient RPC polling and memoization
+
+## Quick Start
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build the registry
+pnpm build:registry
+
+# Start development server
+pnpm dev:registry
+```
+
+## Project Structure
+
+```
+morpheus-ui/
+├── apps/
+│   ├── registry/          # Component registry
+│   └── docs/              # Documentation site
+└── packages/
+    └── shared-types/      # Shared TypeScript types
+```
+
+## Tech Stack
+
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Wagmi v2** - Ethereum interaction
+- **Viem** - Ethereum client
+- **Fumadocs** - Documentation
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](https://github.com/morpheusais/morpheus-ui/blob/main/CONTRIBUTING.md) for details.
